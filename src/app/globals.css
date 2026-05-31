@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Cause";
+  src: url("/fonts/cause/Cause-Thin.ttf") format("truetype");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: "Cause";
+  src: url("/fonts/cause/Cause-ExtraLight.ttf") format("truetype");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: "Cause";
+  src: url("/fonts/cause/Cause-Light.ttf") format("truetype");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Cause";
+  src: url("/fonts/cause/Cause-Regular.ttf") format("truetype");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Cause";
+  src: url("/fonts/cause/Cause-Medium.ttf") format("truetype");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Cause";
+  src: url("/fonts/cause/Cause-SemiBold.ttf") format("truetype");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Cause";
+  src: url("/fonts/cause/Cause-Bold.ttf") format("truetype");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Cause";
+  src: url("/fonts/cause/Cause-ExtraBold.ttf") format("truetype");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: "Cause";
+  src: url("/fonts/cause/Cause-Black.ttf") format("truetype");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 900;
+}
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 223 53% 31%;
+  --card: 0 0% 100%;
+  --card-foreground: 223 53% 31%;
+  --primary: 43 98% 67%;
+  --primary-foreground: 223 53% 31%;
+  --secondary: 103 28% 66%;
+  --secondary-foreground: 223 53% 31%;
+  --muted: 220 13% 95%;
+  --muted-foreground: 220 9% 46%;
+  --accent: 45 98% 93%;
+  --accent-foreground: 223 53% 31%;
+  --border: 223 32% 87%;
+  --input: 223 32% 87%;
+  --ring: 43 98% 58%;
+  --radius: 1rem;
+  --font-rounded: "Cause", "Nunito Sans", Nunito, "Aptos Rounded",
+    "Segoe UI Rounded", "Arial Rounded MT Bold", "Trebuchet MS", ui-rounded,
+    system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+  background: #ffffff;
+  color: hsl(var(--foreground));
+  font-family: var(--font-rounded);
+  letter-spacing: 0;
+  text-rendering: geometricPrecision;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("/backgrounds/baby-doodle-background.png");
+  background-position: center top;
+  background-repeat: repeat-y;
+  background-size: 100% auto;
+  opacity: 0.2;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.tap-highlight {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.safe-bottom {
+  position: relative;
+  z-index: 1;
+  padding-bottom: calc(env(safe-area-inset-bottom) + 5.75rem);
+}
+
+@media (min-width: 768px) {
+  .safe-bottom {
+    padding-bottom: 0;
+  }
+}
