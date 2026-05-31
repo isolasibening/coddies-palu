@@ -31,6 +31,21 @@ function getSafeRedirectPath(value: string | null) {
   return value;
 }
 
+async function getRequestOrigin() {
+  const headerStore = await headers();
+  const requestOrigin = headerStore.get("origin");
+
+  if (requestOrigin) {
+    return requestOrigin;
+  }
+
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
+  }
+
+  return "http://localhost:3000";
+}
+
 export async function getCurrentUser(): Promise<User | null> {
   if (!isSupabaseConfigured()) {
     return null;
@@ -103,10 +118,12 @@ export async function signUpWithPassword(input: {
   }
 
   const supabase = await createServerSupabaseClient();
+  const origin = await getRequestOrigin();
   const { error } = await supabase.auth.signUp({
     email: input.email,
     password: input.password,
     options: {
+      emailRedirectTo: `${origin}/login?registered=1`,
       data: {
         name: input.name,
         location: input.location,
@@ -184,8 +201,7 @@ export async function sendPasswordResetAction() {
     return;
   }
 
-  const headerStore = await headers();
-  const origin = headerStore.get("origin") ?? "http://localhost:3000";
+  const origin = await getRequestOrigin();
 
   await supabase.auth.resetPasswordForEmail(user.email, {
     redirectTo: `${origin}/login`,

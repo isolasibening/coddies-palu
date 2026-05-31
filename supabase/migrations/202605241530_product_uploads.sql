@@ -32,14 +32,20 @@ create policy "Authenticated users can upload product photos"
 on storage.objects
 for insert
 to authenticated
-with check (bucket_id = 'product-photos' and owner = auth.uid());
+with check (
+  bucket_id = 'product-photos'
+  and (storage.foldername(name))[1] = auth.uid()::text
+);
 
 drop policy if exists "Users can delete their own product photos" on storage.objects;
 create policy "Users can delete their own product photos"
 on storage.objects
 for delete
 to authenticated
-using (bucket_id = 'product-photos' and owner = auth.uid());
+using (
+  bucket_id = 'product-photos'
+  and (storage.foldername(name))[1] = auth.uid()::text
+);
 
 alter table public.products enable row level security;
 
